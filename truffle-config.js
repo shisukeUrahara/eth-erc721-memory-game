@@ -1,5 +1,10 @@
 require('babel-register');
 require('babel-polyfill');
+const fs= require('fs');
+const provider= require('@truffle/hdwallet-provider');
+
+const secrets= JSON.parse(fs.readFileSync('.secrets.json').toString().trim());
+
 
 module.exports = {
   networks: {
@@ -8,6 +13,17 @@ module.exports = {
       port: 7545,
       network_id: "*" // Match any network id
     },
+    kovan:{
+      provider:()=>{
+        return new provider(
+          secrets.privateKeys,
+          secrets.infuraUrl,
+          0,
+          1
+        )
+      },
+      network_id:42
+    }
   },
   contracts_directory: './src/contracts/',
   contracts_build_directory: './src/abis/',

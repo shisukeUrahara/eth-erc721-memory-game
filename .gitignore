@@ -94,6 +94,9 @@ dist
 # Serverless directories
 .serverless/
 
+#secret key and infura url
+.secrets.json
+
 # FuseBox cache
 .fusebox/
 
